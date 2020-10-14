@@ -1,48 +1,63 @@
 import java.util.*;
 
 public class PhoneBook {
-	private ArrayList<Phone> phoneList;
+	private int numPhones;
+	private Phone[] phoneList;
+	
+	private Scanner scanner;
 	
 	public PhoneBook() {
-		this.phoneList = new ArrayList<Phone>();
+		
 	}
 	
-	public void addPhones() {
-		Scanner scanner = new Scanner(System.in);
+	private void addPhones() {
 		int numToAdd = 0;
 		String inName = "", inTel = "";
 		
 		System.out.print("인원수>>");
-		numToAdd = scanner.nextInt();
+		numToAdd = this.scanner.nextInt();
 		
-		if (numToAdd <= 0) { scanner.close(); return; }
-		for (int i=0; i<numToAdd; i++) {
+		if (numToAdd <= 0) return;
+		
+		this.numPhones = numToAdd;
+		this.phoneList = new Phone[numToAdd];
+		
+		for (int i=0; i<this.numPhones; i++) {
 			System.out.print("이름과 전화번호(이름과 번호는 빈 칸없이 입력)>>");
-			inName = scanner.next();
-			inTel = scanner.next();
-			this.phoneList.add(new Phone(inName, inTel));
+			inName = this.scanner.next();
+			inTel = this.scanner.next();
+			this.phoneList[i] = new Phone(inName, inTel);
 		}
 		
-		scanner.close();
 		System.out.println("저장되었습니다...");
 	}
 	
-	public void searchPhone() {
+	private void searchPhone() {
 		String keyword="";
-		Scanner scanner = new Scanner(System.in);
 		
-		while (!keyword.equals("그만")) {
+		while (true) {
 			System.out.print("검색할 이름>>");
-			keyword = scanner.next();
+			keyword = this.scanner.next();
+			if (keyword.equals("그만")) break;
 			this.search(keyword);
 		}
-		scanner.close();
 	}
 	
 	private void search(String k) {
-		for (int i=0; i<this.phoneList.size(); i++) {
-			if (k.equals(this.phoneList.get(i).getName()))
-				this.phoneList.get(i).displayInfo();
+		boolean found = false;
+		for (int i=0; i<this.numPhones; i++) {
+			if (k.equals(this.phoneList[i].getName())) {
+				this.phoneList[i].displayInfo();
+				found = true;
+			}
 		}
+		if (!found) System.out.println(k + "이 없습니다.");
+	}
+	
+	public void run() {
+		this.scanner = new Scanner(System.in);
+		this.addPhones();
+		if (this.numPhones > 0) this.searchPhone();
+		this.scanner.close();
 	}
 }
