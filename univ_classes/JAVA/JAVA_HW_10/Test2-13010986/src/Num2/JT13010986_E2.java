@@ -52,20 +52,16 @@ public class JT13010986_E2 extends JFrame {
 		@Override
 		public void run() {
 			while (true) {
-				System.out.println("run!");
 				setLocation();
 			}
 		}
 		
 		synchronized void setLocation() {
-			System.out.println("setLoc!");
 			if (pt == null) {
-				try { System.out.println("wait!!"); wait(); } 
+				try { wait(); }
 				catch (InterruptedException e) { return; }
 			}
-			System.out.println("setted!");
 			lblHelo.setLocation(pt);
-			System.out.println("Done");
 		}
 		
 		synchronized void onClick(Point p) {
@@ -76,7 +72,6 @@ public class JT13010986_E2 extends JFrame {
 		private class MouseEvent implements MouseListener {
 			@Override
 			public void mouseClicked(java.awt.event.MouseEvent arg0) {
-				System.out.println("OnClick!");
 				onClick(arg0.getPoint());
 			}
 

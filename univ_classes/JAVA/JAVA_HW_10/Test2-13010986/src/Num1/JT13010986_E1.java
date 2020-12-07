@@ -46,9 +46,7 @@ public class JT13010986_E1 extends JFrame {
 
 		@Override
 		public void mouseClicked(java.awt.event.MouseEvent arg0) {
-			System.out.println("Click");
 			if (arg0.getComponent() == bot) {
-				System.out.println("Label");
 				lbl.setLocation(arg0.getPoint());
 				if (!lbl.isVisible()) lbl.setVisible(true);
 			}
@@ -56,7 +54,6 @@ public class JT13010986_E1 extends JFrame {
 
 		@Override
 		public void mouseEntered(java.awt.event.MouseEvent arg0) {
-			System.out.println("Enter");
 			if (arg0.getComponent() == btn) {
 				btn.setBackground(Color.red);
 				up.setBackground(Color.red);
@@ -65,7 +62,6 @@ public class JT13010986_E1 extends JFrame {
 
 		@Override
 		public void mouseExited(java.awt.event.MouseEvent arg0) {
-			System.out.println("Exit");
 			if (arg0.getComponent() == btn) {
 				btn.setBackground(Color.yellow);
 				up.setBackground(Color.yellow);
